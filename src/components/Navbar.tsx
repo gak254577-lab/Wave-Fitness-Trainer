@@ -9,7 +9,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { ThemeId } from '../types';
-import { WaveFitnessLogo } from './WaveFitnessLogo';
+import { BrandLogo } from './BrandLogo'; 
 
 export const Navbar: React.FC = () => {
   const {
@@ -91,10 +91,7 @@ export const Navbar: React.FC = () => {
           >
             <div className="relative">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black transition-transform group-hover:scale-105 shadow-xl bg-black border border-stone-800 p-0.5">
-                <WaveFitnessLogo
-                  variant="full"
-                  size={44}
-                />
+                <BrandLogo size={44} />
               </div>
               <div
                 className="absolute -inset-0.5 rounded-xl opacity-40 group-hover:opacity-80 blur transition duration-300 -z-10"
@@ -106,7 +103,7 @@ export const Navbar: React.FC = () => {
                 {profile.name}
               </span>
               <span className={`text-xs font-semibold block leading-none ${currentThemeConfig.textClass}`}>
-                {profile.gymName}
+                {profile.tagline}
               </span>
             </div>
           </a>

@@ -78,7 +78,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-20 lg:py-28 bg-stone-950 border-b border-stone-800/80 relative text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div
@@ -101,10 +101,10 @@ export const ContactSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Left Column: Direct Contact Info, Hours, & Google Map */}
           <div className="lg:col-span-5 space-y-6">
-            
+
             {/* Quick Contact Box */}
             <div className="p-6 rounded-2xl bg-stone-900/80 border border-stone-800 space-y-5 shadow-xl">
               <h3 className="text-lg font-black text-stone-100 flex items-center gap-2">
@@ -183,8 +183,7 @@ export const ContactSection: React.FC = () => {
 
               {/* Location address */}
               <a
-                href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${profile.gymName} ${profile.address} ${profile.city}`)}`}
-                target="_blank"
+                href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${profile.address} ${profile.city}`)}`} target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-xl bg-stone-950 border border-stone-800 hover:border-stone-700 transition-all flex items-start gap-3 group"
               >
@@ -204,7 +203,7 @@ export const ContactSection: React.FC = () => {
                       Directions <ExternalLink className="w-3 h-3" />
                     </span>
                   </div>
-                  <span className="text-stone-200 font-bold text-sm block mt-0.5">{profile.gymName}</span>
+                
                   <span className="text-stone-400 text-xs leading-relaxed block mt-0.5">
                     {profile.address}, {profile.city}
                   </span>
@@ -218,7 +217,7 @@ export const ContactSection: React.FC = () => {
                 <Clock className="w-4 h-4" style={{ color: currentThemeConfig.primaryHex }} />
                 <span>Operating Hours</span>
               </h3>
-              
+
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between py-1.5 border-b border-stone-800">
                   <span className="text-stone-400">Monday – Friday</span>
@@ -242,11 +241,10 @@ export const ContactSection: React.FC = () => {
               <div className="p-3 bg-stone-950 border-b border-stone-800 flex items-center justify-between text-xs">
                 <span className="text-stone-300 font-bold flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5" style={{ color: currentThemeConfig.primaryHex }} />
-                  <span>Wave Fitness Location Map</span>
+               <span>Studio Location Map</span>
                 </span>
                 <a
-                  href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${profile.gymName} ${profile.address} ${profile.city}`)}`}
-                  target="_blank"
+href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${profile.address} ${profile.city}`)}`}                  target="_blank"
                   rel="noopener noreferrer"
                   className={`hover:underline flex items-center gap-1.5 font-bold ${currentThemeConfig.textClass} bg-stone-900 px-2.5 py-1 rounded-lg border border-stone-800 hover:border-yellow-400/50 transition-colors`}
                 >

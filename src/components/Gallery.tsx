@@ -70,7 +70,7 @@ export const Gallery: React.FC = () => {
             Inside the Training Ground
           </h2>
           <p className="text-stone-300 text-base sm:text-lg">
-            A glimpse into our high-energy coaching sessions, Olympic equipment, and personal milestone moments at {profile.gymName}.
+            A glimpse into our high-energy coaching sessions, Olympic equipment, and personal milestone moments.
           </p>
         </div>
 

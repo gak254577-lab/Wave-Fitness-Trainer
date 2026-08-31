@@ -54,7 +54,7 @@ export const TrainerConfigModal: React.FC = () => {
   const handleCopyPromptDetails = () => {
     const text = `
 Trainer Name: ${form.name}
-Gym Name: ${form.gymName}
+Tagline: ${form.tagline}
 Location/Address: ${form.address}, ${form.city}
 Phone: ${form.phone}
 Email: ${form.email}
@@ -70,7 +70,7 @@ Opening Hours: ${form.openingHours.weekdays}
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-end bg-stone-950/80 backdrop-blur-sm">
       <div className="relative w-full max-w-xl h-full bg-stone-900 border-l border-stone-800 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
-        
+
         {/* Header */}
         <div className="p-5 bg-stone-950 border-b border-stone-800 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
@@ -98,7 +98,7 @@ Opening Hours: ${form.openingHours.weekdays}
 
         {/* Scrollable Form Content */}
         <form id="config-form" onSubmit={handleSave} className="p-6 overflow-y-auto flex-1 space-y-6 text-left">
-          
+
           {/* Theme Selector Section */}
           <div className="p-4 rounded-2xl bg-stone-950 border border-stone-800 space-y-3">
             <div className="flex items-center justify-between">
@@ -118,11 +118,10 @@ Opening Hours: ${form.openingHours.weekdays}
                     key={thm.id}
                     type="button"
                     onClick={() => setTheme(thm.id)}
-                    className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${
-                      isActive
+                    className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${isActive
                         ? 'bg-stone-900 border-white/40 shadow-lg scale-105'
                         : 'bg-stone-900/60 border-stone-800 hover:border-stone-700'
-                    }`}
+                      }`}
                   >
                     <span
                       className="w-4 h-4 rounded-full shadow-inner"
@@ -210,7 +209,7 @@ Opening Hours: ${form.openingHours.weekdays}
           <div className="space-y-4 pt-3 border-t border-stone-800">
             <h4 className={`text-xs uppercase font-black tracking-wider flex items-center gap-1.5 ${currentThemeConfig.textClass}`}>
               <Building className="w-3.5 h-3.5" />
-              <span>Gym & Business Info</span>
+              <span>Studio & Business Info</span>
             </h4>
 
             <div>

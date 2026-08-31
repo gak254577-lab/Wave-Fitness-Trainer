@@ -55,7 +55,7 @@ export const About: React.FC = () => {
                 <div className="p-4 rounded-xl bg-stone-900/95 backdrop-blur-md border border-stone-700/60 shadow-xl">
                   <div className="text-stone-100 font-bold text-lg">{profile.name}</div>
                   <div className={`text-xs font-semibold mb-2 ${currentThemeConfig.textClass}`}>
-                    {profile.gymName} • Head Coach
+                    Head Coach
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {(profile.specialties || []).slice(0, 3).map((spec, i) => (

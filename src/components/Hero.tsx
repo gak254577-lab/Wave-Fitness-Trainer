@@ -50,11 +50,11 @@ export const Hero: React.FC = () => {
                 <Zap className="w-3.5 h-3.5 animate-pulse" style={{ color: currentThemeConfig.primaryHex }} />
                 <span className="text-stone-200">Certified Master Coach</span>
                 <span className="w-1 h-1 rounded-full bg-stone-600"></span>
-                <span style={{ color: currentThemeConfig.primaryHex }}>{profile.gymName}</span>
+                <span style={{ color: currentThemeConfig.primaryHex }}>{profile.tagline}</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-[11px] font-bold text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Open for 1-on-1 Sessions</span>
+                <span>Online & Offline Training Available</span>
               </div>
             </div>
 

@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { TrialBookingRequest, TrialPass } from '../types';
 import { TrialPassTicket } from './TrialPassTicket';
-import { WaveFitnessLogo } from './WaveFitnessLogo';
+import { BrandLogo } from './BrandLogo';
 
 export const TrialBookingModal: React.FC = () => {
   const {
@@ -94,17 +94,14 @@ export const TrialBookingModal: React.FC = () => {
         <div className="p-4 sm:p-6 bg-stone-950 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-black border border-stone-800 flex items-center justify-center p-0.5 shadow-md">
-              <WaveFitnessLogo
-                variant="full"
-                size={36}
-              />
+              <BrandLogo size={36} />
             </div>
             <div>
               <h3 className="text-base sm:text-lg font-black text-stone-100 leading-tight">
                 {selectedPlan ? `Pass for ${selectedPlan.name}` : 'Free 60-Min Trial Session'}
               </h3>
               <p className="text-[11px] sm:text-xs text-stone-400">
-                {profile.name} • {profile.gymName}
+                {profile.tagline}
               </p>
             </div>
           </div>

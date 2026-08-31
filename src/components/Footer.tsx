@@ -11,7 +11,7 @@ import {
   ArrowUp,
   Heart
 } from 'lucide-react';
-import { WaveFitnessLogo } from './WaveFitnessLogo';
+import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   const { profile, openTrialModal, openConfigModal, currentThemeConfig } = useTrainer();
@@ -92,15 +92,12 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-3.5">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center font-black shadow-lg bg-black border border-stone-800 p-0.5">
-                <WaveFitnessLogo
-                  variant="full"
-                  size={44}
-                />
+                <BrandLogo size={44} />
               </div>
               <div>
                 <span className="text-lg font-black text-stone-100 block leading-tight">{profile.name}</span>
                 <span className={`text-xs font-semibold leading-none ${currentThemeConfig.textClass}`}>
-                  {profile.gymName}
+                  {profile.tagline}
                 </span>
               </div>
             </div>
@@ -176,11 +173,11 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details */}
           <div className="lg:col-span-4 space-y-3 text-xs">
-            <h4 className="text-xs font-bold text-stone-100 uppercase tracking-wider">Gym & Studio</h4>
+            <h4 className="text-xs font-bold text-stone-100 uppercase tracking-wider">Studio & Location</h4>
             
             <div className="space-y-2.5 text-stone-400">
               <a
-                href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${profile.gymName} ${profile.address} ${profile.city}`)}`}
+                href={profile.googleMapDirectionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(` ${profile.address} ${profile.city}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-2 group hover:text-white transition-colors"
@@ -216,7 +213,7 @@ export const Footer: React.FC = () => {
         <div className="mt-12 pt-6 border-t border-stone-900 text-[11px] text-stone-600 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <span className="text-stone-500">Local Focus:</span>
-            <span className="bg-stone-900 px-2 py-0.5 rounded border border-stone-800/50">{profile.gymName}</span>
+            <span className="bg-stone-900 px-2 py-0.5 rounded border border-stone-800/50">{profile.name}</span>
             <span className="bg-stone-900 px-2 py-0.5 rounded border border-stone-800/50">{profile.city} Personal Trainer</span>
             <span className="bg-stone-900 px-2 py-0.5 rounded border border-stone-800/50">1-on-1 Weight Loss Coach</span>
             <span className="bg-stone-900 px-2 py-0.5 rounded border border-stone-800/50">Olympic Strength & Conditioning</span>
@@ -235,7 +232,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom copyright line */}
         <div className="mt-6 pt-6 border-t border-stone-900 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-3">
-          <p>© {new Date().getFullYear()} {profile.gymName} • {profile.name}. All rights reserved.</p>
+         <p>© {new Date().getFullYear()} {profile.gymName} • {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <button onClick={openConfigModal} className={`hover:underline transition-colors ${currentThemeConfig.textClass}`}>
               Customize Trainer & Theme

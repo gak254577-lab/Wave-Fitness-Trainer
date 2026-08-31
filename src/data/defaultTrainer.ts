@@ -17,8 +17,8 @@ export const DEFAULT_TRAINER_PROFILE: TrainerProfile = {
   name: 'Subham Singh',
   tagline: 'Elite Strength & Body Transformation Specialist',
   heroHeadline: 'Transform Your Body with Subham Singh',
-  heroSubheadline: 'Science-backed personal training, bespoke nutrition coaching, and unstoppable habit formation engineered to build your strongest, leanest physique at Wave Fitness.',
-  gymName: 'Wave Fitness',
+  heroSubheadline: 'Science-backed personal training, bespoke nutrition coaching, and unstoppable habit formation engineered to build your strongest, leanest physique.',
+  gymName: 'Subham Singh',
   yearsOfExperience: 8,
   clientsTransformed: 480,
   rating: 4.96,
@@ -296,6 +296,7 @@ export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
     period: 'per year',
     badge: 'Ultimate',
     features: [
+      'Free Branded Performance T-Shirt & Shaker',
       'Unlimited 1-on-1 Training Sessions (Up to 4x/week)',
       'Quarterly Blood Panel & Hormonal Health Review Consults',
       'Priority Slot Booking & Flexible Rescheduling',
@@ -373,7 +374,7 @@ export const DEFAULT_GALLERY: GalleryItem[] = [
   },
   {
     id: 'gal-4',
-    title: 'Wave Fitness Premium Free-Weights & Racks',
+    title: 'Premium Free-Weights & Racks',
     category: 'facility',
     imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80',
     caption: 'Competition-spec barbells, calibrated plates, and Olympic power racks at Wave Fitness.',

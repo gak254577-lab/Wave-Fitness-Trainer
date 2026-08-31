@@ -11,7 +11,7 @@ import {
   MessageSquare,
   ExternalLink
 } from 'lucide-react';
-import { WaveFitnessLogo } from './WaveFitnessLogo';
+import { BrandLogo } from './BrandLogo';
 
 interface TrialPassTicketProps {
   pass: TrialPass;
@@ -27,7 +27,7 @@ export const TrialPassTicket: React.FC<TrialPassTicketProps> = ({ pass, onClose 
 
   const whatsappMessage = encodeURIComponent(
     `🔥 *New 60-Min Trial Session Booking*\n\n` +
-    `Hello Coach ${profile.name} (@ ${pass.gymName}),\n` +
+    `Hello Coach ${profile.name},\n` +
     `I have just claimed my Free 60-Minute 1-on-1 Trial Session!\n\n` +
     `📋 *Booking Summary:*\n` +
     `• *Pass ID:* ${pass.passId}\n` +
@@ -36,7 +36,7 @@ export const TrialPassTicket: React.FC<TrialPassTicketProps> = ({ pass, onClose 
     `• *Date:* ${pass.date}\n` +
     `• *Preferred Time Slot:* ${pass.timeSlot}\n` +
     `• *Fitness Goal:* ${pass.fitnessGoal}\n\n` +
-    `Please confirm my slot. See you at ${pass.gymName}!`
+    `Please confirm my slot. See you soon!`
   );
 
   const cleanPhone = profile.whatsappNumber || profile.phone.replace(/[^0-9]/g, '');
@@ -60,16 +60,13 @@ export const TrialPassTicket: React.FC<TrialPassTicketProps> = ({ pass, onClose 
       >
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-0.5 shadow">
-            <WaveFitnessLogo
-              variant="full"
-              size={28}
-            />
+            <BrandLogo size={28} />
           </div>
           <div>
             <span className="text-xs uppercase tracking-widest block text-stone-950 font-extrabold leading-none">
               VIP ACCESS PASS
             </span>
-            <span className="text-base leading-tight font-black">{pass.gymName}</span>
+          <span className="text-base leading-tight font-black">{pass.trainerName}</span>
           </div>
         </div>
 
