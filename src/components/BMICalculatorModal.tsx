@@ -7,24 +7,30 @@ export const BMICalculatorModal: React.FC = () => {
 
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
   const [gender, setGender] = useState<'male' | 'female'>('male');
-  const [age, setAge] = useState<number>(30);
-  const [weightKg, setWeightKg] = useState<number>(75);
-  const [heightCm, setHeightCm] = useState<number>(175);
-  const [weightLbs, setWeightLbs] = useState<number>(165);
-  const [heightFt, setHeightFt] = useState<number>(5);
-  const [heightIn, setHeightIn] = useState<number>(9);
-  const [activity, setActivity] = useState<'sedentary' | 'light' | 'moderate' | 'very'>('moderate');
+  const [age, setAge] = useState<number | ''>('');
+  const [weightKg, setWeightKg] = useState<number | ''>('');
+  const [heightCm, setHeightCm] = useState<number | ''>('');
+  const [weightLbs, setWeightLbs] = useState<number | ''>('');
+  const [heightFt, setHeightFt] = useState<number | ''>('');
+  const [heightIn, setHeightIn] = useState<number | ''>('');
+  const [activity, setActivity] = useState<'sedentary' | 'light' | 'moderate' | 'very'>('light');
 
   if (!isBMICalculatorOpen) return null;
 
-  // Conversions and calculations
-  const actualWeightKg = unit === 'metric' ? weightKg : weightLbs * 0.453592;
-  const actualHeightM = unit === 'metric' ? heightCm / 100 : (heightFt * 12 + heightIn) * 0.0254;
+  const numericAge = Number(age) || 0;
+  const numericWeightKg = unit === 'metric' ? Number(weightKg) || 0 : Number(weightLbs) || 0;
+  const numericHeightCm = unit === 'metric' ? Number(heightCm) || 0 : 0;
+  const numericHeightFt = unit === 'imperial' ? Number(heightFt) || 0 : 0;
+  const numericHeightIn = unit === 'imperial' ? Number(heightIn) || 0 : 0;
 
-  const bmi = actualHeightM > 0 ? Number((actualWeightKg / (actualHeightM * actualHeightM)).toFixed(1)) : 0;
+  const actualWeightKg = unit === 'metric' ? numericWeightKg : numericWeightKg * 0.453592;
+  const actualHeightM = unit === 'metric' ? (numericHeightCm > 0 ? numericHeightCm / 100 : 0) : ((numericHeightFt * 12 + numericHeightIn) * 0.0254 || 0);
+
+  const hasValidInputs = actualWeightKg > 0 && actualHeightM > 0 && numericAge > 0;
+  const bmi = hasValidInputs ? Number((actualWeightKg / (actualHeightM * actualHeightM)).toFixed(1)) : 0;
 
   // BMR via Mifflin-St Jeor Equation
-  let bmr = 10 * actualWeightKg + 6.25 * (actualHeightM * 100) - 5 * age;
+  let bmr = 10 * actualWeightKg + 6.25 * (actualHeightM * 100) - 5 * numericAge;
   if (gender === 'male') {
     bmr += 5;
   } else {
@@ -38,9 +44,9 @@ export const BMICalculatorModal: React.FC = () => {
     very: 1.725,
   };
 
-  const maintenanceCalories = Math.round(bmr * activityMultipliers[activity]);
-  const fatLossCalories = Math.round(maintenanceCalories * 0.8);
-  const muscleGainCalories = Math.round(maintenanceCalories * 1.15);
+  const maintenanceCalories = hasValidInputs ? Math.round(bmr * activityMultipliers[activity]) : 0;
+  const fatLossCalories = hasValidInputs ? Math.round(maintenanceCalories * 0.8) : 0;
+  const muscleGainCalories = hasValidInputs ? Math.round(maintenanceCalories * 1.15) : 0;
 
   const getBMICategory = (val: number) => {
     if (val < 18.5) return { label: 'Underweight', color: 'text-blue-400', desc: 'Focus on muscle mass & structured surplus nutrition.' };
@@ -50,6 +56,9 @@ export const BMICalculatorModal: React.FC = () => {
   };
 
   const bmiCategory = getBMICategory(bmi);
+  const displayBMI = hasValidInputs ? bmi : '—';
+  const displayCategory = hasValidInputs ? bmiCategory.label : 'Add your details';
+  const displayCategoryColor = hasValidInputs ? bmiCategory.color : 'text-stone-400';
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-stone-950/85 backdrop-blur-md overflow-y-auto">
@@ -164,10 +173,10 @@ export const BMICalculatorModal: React.FC = () => {
               <label className="text-xs font-semibold text-stone-400 block mb-1.5">Age (Years)</label>
               <input
                 type="number"
-                min="14"
+                min="0"
                 max="90"
                 value={age}
-                onChange={(e) => setAge(Math.max(14, Number(e.target.value)))}
+                onChange={(e) => setAge(e.target.value === '' ? '' : Math.max(0, Number(e.target.value))) }
                 className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-stone-600"
               />
             </div>
@@ -178,10 +187,10 @@ export const BMICalculatorModal: React.FC = () => {
                   <label className="text-xs font-semibold text-stone-400 block mb-1.5">Weight (kg)</label>
                   <input
                     type="number"
-                    min="30"
+                    min="0"
                     max="250"
                     value={weightKg}
-                    onChange={(e) => setWeightKg(Number(e.target.value))}
+                    onChange={(e) => setWeightKg(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-stone-600"
                   />
                 </div>
@@ -189,10 +198,10 @@ export const BMICalculatorModal: React.FC = () => {
                   <label className="text-xs font-semibold text-stone-400 block mb-1.5">Height (cm)</label>
                   <input
                     type="number"
-                    min="100"
+                    min="0"
                     max="240"
                     value={heightCm}
-                    onChange={(e) => setHeightCm(Number(e.target.value))}
+                    onChange={(e) => setHeightCm(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-stone-600"
                   />
                 </div>
@@ -203,10 +212,10 @@ export const BMICalculatorModal: React.FC = () => {
                   <label className="text-xs font-semibold text-stone-400 block mb-1.5">Weight (lbs)</label>
                   <input
                     type="number"
-                    min="60"
+                    min="0"
                     max="500"
                     value={weightLbs}
-                    onChange={(e) => setWeightLbs(Number(e.target.value))}
+                    onChange={(e) => setWeightLbs(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-stone-600"
                   />
                 </div>
@@ -215,10 +224,10 @@ export const BMICalculatorModal: React.FC = () => {
                   <div className="grid grid-cols-2 gap-1">
                     <input
                       type="number"
-                      min="3"
+                      min="0"
                       max="7"
                       value={heightFt}
-                      onChange={(e) => setHeightFt(Number(e.target.value))}
+                      onChange={(e) => setHeightFt(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                       className="w-full bg-stone-950 border border-stone-800 rounded-lg px-2 py-2 text-stone-100 text-sm text-center"
                       placeholder="ft"
                     />
@@ -227,7 +236,7 @@ export const BMICalculatorModal: React.FC = () => {
                       min="0"
                       max="11"
                       value={heightIn}
-                      onChange={(e) => setHeightIn(Number(e.target.value))}
+                      onChange={(e) => setHeightIn(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                       className="w-full bg-stone-950 border border-stone-800 rounded-lg px-2 py-2 text-stone-100 text-sm text-center"
                       placeholder="in"
                     />
@@ -258,32 +267,32 @@ export const BMICalculatorModal: React.FC = () => {
               <div>
                 <span className="text-xs text-stone-400 block">Your Calculated BMI</span>
                 <span className="text-3xl font-black" style={{ color: currentThemeConfig.primaryHex }}>
-                  {bmi}
+                  {hasValidInputs ? bmi : '—'}
                 </span>
               </div>
               <div className="text-right">
                 <span className="text-xs text-stone-400 block">Category</span>
-                <span className={`text-sm font-bold ${bmiCategory.color}`}>{bmiCategory.label}</span>
+                <span className={`text-sm font-bold ${displayCategoryColor}`}>{displayCategory}</span>
               </div>
             </div>
 
-            <p className="text-xs text-stone-300 italic">{bmiCategory.desc}</p>
+            <p className="text-xs text-stone-300 italic">{hasValidInputs ? bmiCategory.desc : 'Enter age, height, and weight to calculate your BMI and calorie targets.'}</p>
 
             {/* Calories Breakdown */}
             <div className="grid grid-cols-3 gap-2 pt-2 text-center">
               <div className="p-2.5 rounded-lg bg-stone-900 border border-stone-800">
                 <span className="text-[11px] text-stone-400 block">Fat Loss</span>
-                <span className={`text-sm font-bold ${currentThemeConfig.textClass}`}>{fatLossCalories}</span>
+                <span className={`text-sm font-bold ${currentThemeConfig.textClass}`}>{hasValidInputs ? fatLossCalories : '—'}</span>
                 <span className="text-[10px] text-stone-500 block">kcal / day</span>
               </div>
               <div className="p-2.5 rounded-lg bg-stone-900 border border-stone-800">
                 <span className="text-[11px] text-stone-400 block">Maintenance</span>
-                <span className="text-sm font-bold text-stone-200">{maintenanceCalories}</span>
+                <span className="text-sm font-bold text-stone-200">{hasValidInputs ? maintenanceCalories : '—'}</span>
                 <span className="text-[10px] text-stone-500 block">kcal / day</span>
               </div>
               <div className="p-2.5 rounded-lg bg-stone-900 border border-stone-800">
                 <span className="text-[11px] text-stone-400 block">Muscle Gain</span>
-                <span className="text-sm font-bold text-emerald-400">{muscleGainCalories}</span>
+                <span className="text-sm font-bold text-emerald-400">{hasValidInputs ? muscleGainCalories : '—'}</span>
                 <span className="text-[10px] text-stone-500 block">kcal / day</span>
               </div>
             </div>
